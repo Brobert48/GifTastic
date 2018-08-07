@@ -6,7 +6,7 @@ var GifTastic = {
         for(var i=0; i< this.btnArray.length;i++){
         var newBtn = $('<button>');
         newBtn.attr('type','button')
-        .attr('class','btn btn-info text-capitalize')
+        .attr('class','btn btn-info text-capitalize m-1')
         .attr('data-value', this.btnArray[i])
         .text(this.btnArray[i]);
         $('#buttons-area').append(newBtn);
