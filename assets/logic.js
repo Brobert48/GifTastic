@@ -6,7 +6,7 @@ var GifTastic = {
         for(var i=0; i< this.btnArray.length;i++){
         var newBtn = $('<button>');
         newBtn.attr('type','button')
-        .attr('class','btn btn-info caps')
+        .attr('class','btn btn-info text-capitalize')
         .attr('data-value', this.btnArray[i])
         .text(this.btnArray[i]);
         $('#buttons-area').append(newBtn);
@@ -49,7 +49,7 @@ $.ajax({
         var rating = response.data[c].rating;
         ratingDiv.attr('class','card-title')
         .attr('id','rating')
-        .attr('class', 'caps')
+        .attr('class', 'text-capitalize')
         .text('Rating: ' + rating);
         titleDiv.text(title)
         .attr('class', 'font-italic')
