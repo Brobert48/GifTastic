@@ -2,10 +2,11 @@ var GifTastic = {
     btnArray : ["rick and morty", "futurama", "south park", "american dad", "family guy", "bugs bunny"],
     selected : "",
     popBtns : function() {
+        $('#buttons-area').empty();
         for(var i=0; i< this.btnArray.length;i++){
         var newBtn = $('<button>');
         newBtn.attr('type','button')
-        .attr('class','btn btn-info')
+        .attr('class','btn btn-info caps')
         .attr('data-value', this.btnArray[i])
         .text(this.btnArray[i]);
         $('#buttons-area').append(newBtn);
@@ -14,7 +15,7 @@ var GifTastic = {
 
 GifTastic.popBtns();
 
-$('.btn').on('click', function(){
+$('#buttons-area').on('click', '.btn', function(){
     $('#images-area').empty();
     console.log($(this).attr('data-value'));
     var selected = $(this).attr('data-value')
@@ -30,9 +31,12 @@ $.ajax({
         .attr('style','float:left; width: 18rem;');
 
         var cardImg = $('<img>');
-        cardImg.attr('class','card-img-top ')
+        cardImg.attr('class','gif')
         .attr('src', response.data[c].images.original_still.url)
         .attr('alt', response.data[c].title)
+        .attr('data-state','still')
+        .attr('data-still', response.data[c].images.original_still.url)
+        .attr('data-animate', response.data[c].images.original.url)
         .attr('style','height:200px');
 
         var cardBody= $('<div>');
@@ -51,3 +55,20 @@ $.ajax({
     }
 })
 });
+
+$("#images-area").on("click", '.gif' , function() {
+      var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    });
+
+$('#addShow').on('click', function(){
+    var newShow = $('#input-show').val().trim().toLowerCase()
+    GifTastic.btnArray.push(newShow);
+    GifTastic.popBtns();
+})
