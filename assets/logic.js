@@ -40,13 +40,22 @@ $.ajax({
         .attr('style','height:200px');
 
         var cardBody= $('<div>');
-        cardBody.attr('class', 'card-body');
+        cardBody.attr('class', 'card-body')
+        .attr('style', 'height:100px');
 
         var ratingDiv = $('<h5>');
+        var titleDiv = $('<div>');
+        var title = response.data[c].title;
         var rating = response.data[c].rating;
         ratingDiv.attr('class','card-title')
         .attr('id','rating')
-        .text(rating);
+        .attr('class', 'caps')
+        .text('Rating: ' + rating);
+        titleDiv.text(title)
+        .attr('class', 'font-italic')
+        .attr('style', 'font-size: 16px; font-weight: normal;') ;
+        ratingDiv.prepend(titleDiv);
+        
         
         newCard.append(cardImg,cardBody);
         cardBody.append(ratingDiv);
